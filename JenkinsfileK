@@ -1,0 +1,19 @@
+node {
+   stage('Build') {
+      // Run the Taurus build
+   }
+   stage('Performance Tests') {
+    parallel(
+        BlazeMeterTest: {
+            dir ('taurus') {
+                sh 'bzt demo.yml -report'
+            }
+        },
+        Analysis: {
+            sleep 60
+        })
+   }
+
+   stage(‘Deploy’) {
+   }
+}
