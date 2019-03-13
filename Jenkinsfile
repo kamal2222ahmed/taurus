@@ -1,4 +1,4 @@
-@Library("jenkins_library") _
+@Library("jenkins_library")_
 @Library('shared-pipeline-library')_
 
 podTemplate(label: 'buildAgent', serviceAccount: 'vmss-jenkins', containers: [
