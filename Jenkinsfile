@@ -1,4 +1,13 @@
 @Library("jenkins_library") _
+@Library('shared-pipeline-library')_
+
+podTemplate(label: 'buildAgent', serviceAccount: 'vmss-jenkins', containers: [
+    containerTemplate(name: 'docker', image: 'docker:stable-dind', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.10.3', command: 'cat', ttyEnabled: true)
+    ],
+    volumes: [
+      hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
+    ])
 
 node()
 {
